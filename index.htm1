@@ -1,0 +1,313 @@
+<!doctype html> 
+
+<html lang="de"> 
+
+<head> 
+
+  <meta charset="utf-8"> 
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+  <meta name="theme-color" content="#111315"> 
+
+  <title>Feldjäger | Bundeswehr Roleplay</title> 
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"> 
+
+  <link rel="stylesheet" href="styles.css"> 
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> 
+
+</head> 
+
+<body> 
+
+  <header class="header"> 
+
+    <div class="logo">FELDJÄGER <span>NELE</span></div> 
+
+    <nav> 
+
+      <a href="#start">Start</a> 
+
+      <a href="#leitung">Führung</a> 
+
+      <a href="#personal">Personal</a> 
+
+      <a href="#ausbildung">Ausbildung</a> 
+
+      <a href="#regeln">Regelwerke</a> 
+
+      <a href="#akten">Aktenverwaltung</a> 
+
+    </nav> 
+
+  </header> 
+
+ 
+
+  <main> 
+
+    <section id="start" class="hero"> 
+
+      <p class="orange">BUNDESWEHR ROLEPLAY</p> 
+
+      <h1>FELDJÄGER</h1> 
+
+      <h2>Ordnung. Disziplin. Verantwortung.</h2> 
+
+      <p>Willkommen auf der offiziellen Informations- und Verwaltungsseite unserer Feldjäger-Division.</p> 
+
+      <a class="button" href="#leitung">Unsere Führung</a> 
+
+    </section> 
+
+ 
+
+    <section id="leitung" class="section"> 
+
+      <p class="orange">ORGANISATION</p> 
+
+      <h2>Divisionsführung</h2> 
+
+      <div class="cards"> 
+
+        <article class="card"> 
+
+          <h3>NELE</h3> 
+
+          <p>Leutnant</p> 
+
+          <strong>Divi-Leitung</strong> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Luca</h3> 
+
+          <p>Stellvertretung</p> 
+
+          <strong>Besetzt</strong> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Unbesetzt</h3> 
+
+          <p>Ausbildungsleitung</p> 
+
+          <strong>Derzeit vakant</strong> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Unbesetzt</h3> 
+
+          <p>Gruppenführung</p> 
+
+          <strong>Derzeit vakant</strong> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Unbesetzt</h3> 
+
+          <p>Streifenführung</p> 
+
+          <strong>Derzeit vakant</strong> 
+
+        </article> 
+
+      </div> 
+
+      <p class="notice">Ausbilder werden ausschließlich durch NELE ernannt. Disziplinarische Strafen dürfen ausschließlich durch die Divi-Leitung verhängt werden.</p> 
+
+    </section> 
+
+ 
+
+    <section id="personal" class="section"> 
+
+      <p class="orange">PERSONAL</p> 
+
+      <h2>Personalübersicht</h2> 
+
+      <div class="cards"> 
+
+        <article class="card"> 
+
+          <h3>NELE</h3> 
+
+          <p>Leutnant · Divi-Leitung</p> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Luca</h3> 
+
+          <p>Stellvertretung · Dienstgrad noch nicht bestätigt</p> 
+
+        </article> 
+
+      </div> 
+
+    </section> 
+
+ 
+
+    <section id="ausbildung" class="section"> 
+
+      <p class="orange">QUALIFIKATION</p> 
+
+      <h2>Ausbildung</h2> 
+
+      <div class="cards"> 
+
+        <article class="card"> 
+
+          <h3>Grundausbildung</h3> 
+
+          <p>Grundlagen, Aufgaben und Verhalten der Feldjäger.</p> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Theorie</h3> 
+
+          <p>Regelwerke, Zuständigkeiten und Dienstabläufe.</p> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Praxis</h3> 
+
+          <p>Übungen und praktische Anwendung im Roleplay.</p> 
+
+        </article> 
+
+      </div> 
+
+      <p class="notice">Das Ausbildungssystem Version 1.0 ist noch nicht offiziell freigegeben.</p> 
+
+    </section> 
+
+ 
+
+    <section id="regeln" class="section"> 
+
+      <p class="orange">DOKUMENTE</p> 
+
+      <h2>Regelwerke</h2> 
+
+      <div class="cards"> 
+
+        <article class="card"> 
+
+          <h3>Feldjäger-Regelwerk</h3> 
+
+          <p>Grundregeln und Verhaltensvorschriften.</p> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Divisionshandbuch</h3> 
+
+          <p>Aufbau und Organisation der Division.</p> 
+
+        </article> 
+
+        <article class="card"> 
+
+          <h3>Ausbildungssystem</h3> 
+
+          <p>Ausbildungsinhalte und Prüfungsabläufe.</p> 
+
+        </article> 
+
+      </div> 
+
+    </section> 
+
+ 
+
+    <section class="section"> 
+
+      <p class="orange">DIENSTBETRIEB</p> 
+
+      <h2>Wochenplan und Termine</h2> 
+
+      <p>Der offizielle Wochenplan und aktuelle Termine werden hier für die Kameraden bereitgestellt.</p> 
+
+    </section> 
+
+ 
+
+    <section id="akten" class="section"> 
+
+      <p class="orange">GESCHÜTZTER BEREICH</p> 
+
+      <h2>Aktenverwaltung</h2> 
+
+      <div class="card login"> 
+
+        <h3>Mitglieder-Login</h3> 
+
+        <form id="loginForm"> 
+
+          <label>E-Mail-Adresse</label> 
+
+          <input id="email" type="email" required> 
+
+          <label>Passwort</label> 
+
+          <input id="password" type="password" required> 
+
+          <button class="button" type="submit">Anmelden</button> 
+
+        </form> 
+
+        <p id="authMessage"></p> 
+
+      </div> 
+
+      <div id="caseApp" hidden> 
+
+        <h3>Aktenregister</h3> 
+
+        <button id="logoutBtn">Abmelden</button> 
+
+        <div id="caseRows"></div> 
+
+      </div> 
+
+      <p class="notice">Die Aktenverwaltung wird nach Einrichtung der Supabase-Datenbank aktiviert.</p> 
+
+    </section> 
+
+  </main> 
+
+ 
+
+  <footer> 
+
+    <p>FELDJÄGER · Bundeswehr Roleplay</p> 
+
+    <p>Privates Roleplay-Projekt – keine offizielle Bundeswehr-Website.</p> 
+
+  </footer> 
+
+ 
+
+  <script src="script.js"></script> 
+
+</body> 
+
+</html>
