@@ -10,9 +10,9 @@
 
 // SUPABASE EINSTELLUNGEN 
 
-const SUPABASE_URL = "DEINE_SUPABASE_URL"; 
+const SUPABASE_URL = "https://vpxgjzbptfnsrzrnxndo.supabase.co"; 
 
-const SUPABASE_ANON_KEY = "DEIN_SUPABASE_ANON_KEY"; 
+const SUPABASE_ANON_KEY = "sb_publishable_bo68zX2qVANCUemJOD977Q_I_2dSNF-"; 
 
  
 
