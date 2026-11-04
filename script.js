@@ -206,7 +206,7 @@ async function loadCases() {
 
         .select("*") 
 
-        .order("created_at", { ascending: false }); 
+        .order("erstellt_am", { ascending: false }); 
 
  
 
