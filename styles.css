@@ -669,3 +669,15 @@ select,
   user-select: text;
   -webkit-user-select: text;
 }
+/* Fokus-Markierung bei normalen Klicks entfernen */
+*:focus:not(input):not(textarea):not(select):not([contenteditable="true"]) {
+  outline: none !important;
+  caret-color: transparent !important;
+}
+
+/* Schreibcursor nur in Eingabefeldern */
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: auto !important;
+}
