@@ -647,3 +647,25 @@ Footer {
   } 
 
 } 
+/* Kein blinkender Schreibcursor beim normalen Anklicken */
+html,
+body,
+a,
+button,
+.card,
+.nav-link,
+.dashboard-card {
+  caret-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* In Eingabefeldern darf man weiterhin schreiben */
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  caret-color: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}
