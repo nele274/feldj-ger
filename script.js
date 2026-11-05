@@ -1,14 +1,12 @@
 // ========================================== 
 
-// FELDJÄGER WEBSITE – SCRIPT.JS 
+// FELDJÄGER ULTIMATE MAXPLUS 
 
-// Divi-Leitung: NELE 
+// Anmeldung und Sitzungsverwaltung 
 
 // ========================================== 
 
  
-
-// SUPABASE EINSTELLUNGEN 
 
 const SUPABASE_URL = "https://vpxgjzbptfnsrzrnxndo.supabase.co"; 
 
@@ -16,21 +14,21 @@ const SUPABASE_ANON_KEY = "sb_publishable_bo68zX2qVANCUemJOD977Q_I_2dSNF-";
 
  
 
-// Verbindung zur Datenbank 
-
 const db = window.supabase.createClient( 
 
-    SUPABASE_URL, 
+  SUPABASE_URL, 
 
-    SUPABASE_ANON_KEY 
+  SUPABASE_ANON_KEY 
 
 ); 
 
  
 
-// HTML Elemente 
+// HTML-Elemente 
 
 const loginForm = document.getElementById("loginForm"); 
+
+const loginBox = document.getElementById("loginBox"); 
 
 const emailInput = document.getElementById("email"); 
 
@@ -46,286 +44,330 @@ const caseRows = document.getElementById("caseRows");
 
  
 
-// ========================================== 
+// Rollenbezeichnungen 
+
+const ROLE_NAMES = { 
+
+  admin: "Divisionsleitung", 
+
+  deputy: "Stellvertretung", 
+
+  personnel: "Personalabteilung", 
+
+  leader: "Führungskraft", 
+
+  member: "Mitglied" 
+
+}; 
+
+ 
+
+// Nachricht anzeigen 
+
+function showMessage(message, isError = false) { 
+
+  if (!authMessage) return; 
+
+ 
+
+  authMessage.textContent = message; 
+
+  authMessage.style.color = isError ? "#ff7777" : "#ffad52"; 
+
+} 
+
+ 
+
+// Dashboard anzeigen oder verbergen 
+
+function showDashboard(profile) { 
+
+  if (loginBox) loginBox.hidden = true; 
+
+  if (caseApp) caseApp.hidden = false; 
+
+ 
+
+  if (!profile) return; 
+
+ 
+
+  const dashboardHeader = document.querySelector(".dashboard-header"); 
+
+ 
+
+  if (dashboardHeader) { 
+
+    let profileInfo = document.getElementById("profileInfo"); 
+
+ 
+
+    if (!profileInfo) { 
+
+      profileInfo = document.createElement("p"); 
+
+      profileInfo.id = "profileInfo"; 
+
+      dashboardHeader.appendChild(profileInfo); 
+
+    } 
+
+ 
+
+    const name = profile.display_name || profile.username || "Mitglied"; 
+
+    const role = ROLE_NAMES[profile.role] || "Unbekannte Rolle"; 
+
+ 
+
+    profileInfo.textContent = `Angemeldet als: ${name} · ${role}`; 
+
+  } 
+
+ 
+
+  if (caseRows) { 
+
+    caseRows.textContent = 
+
+      "Die Aktenmodule werden nach Einrichtung der Datenbankrechte aktiviert."; 
+
+  } 
+
+} 
+
+ 
+
+// Login anzeigen 
+
+function showLogin() { 
+
+  if (loginBox) loginBox.hidden = false; 
+
+  if (caseApp) caseApp.hidden = true; 
+
+} 
+
+ 
+
+// Benutzerprofil laden 
+
+async function loadProfile(userId) { 
+
+  const { data, error } = await db 
+
+    .from("profiles") 
+
+    .select("id, display_name, username, role") 
+
+    .eq("id", userId) 
+
+    .maybeSingle(); 
+
+ 
+
+  if (error) { 
+
+    console.error("Profilfehler:", error); 
+
+    throw new Error("Dein Benutzerprofil konnte nicht geladen werden."); 
+
+  } 
+
+ 
+
+  if (!data) { 
+
+    throw new Error( 
+
+      "Für dieses Konto wurde noch kein Benutzerprofil eingerichtet." 
+
+    ); 
+
+  } 
+
+ 
+
+  return data; 
+
+} 
+
+ 
+
+// Aktuelle Sitzung verarbeiten 
+
+async function syncSession(session) { 
+
+  if (!session) { 
+
+    showLogin(); 
+
+    return; 
+
+  } 
+
+ 
+
+  try { 
+
+    const profile = await loadProfile(session.user.id); 
+
+    showDashboard(profile); 
+
+  } catch (error) { 
+
+    showLogin(); 
+
+    showMessage(error.message, true); 
+
+  } 
+
+} 
+
+ 
 
 // ANMELDUNG 
 
-// ========================================== 
-
- 
-
 if (loginForm) { 
 
-    loginForm.addEventListener("submit", async (event) => { 
+  loginForm.addEventListener("submit", async (event) => { 
 
-        event.preventDefault(); 
-
- 
-
-        authMessage.textContent = "Anmeldung läuft..."; 
+    event.preventDefault(); 
 
  
 
-        const { data, error } = await db.auth.signInWithPassword({ 
+    const email = emailInput.value.trim(); 
 
-            email: emailInput.value.trim(), 
-
-            password: passwordInput.value 
-
-        }); 
+    const password = passwordInput.value; 
 
  
 
-        if (error) { 
-
-            authMessage.textContent = 
-
-                "Anmeldung fehlgeschlagen: " + error.message; 
-
-            return; 
-
-        } 
+    showMessage("Anmeldung läuft ..."); 
 
  
 
-        authMessage.textContent = "Erfolgreich angemeldet!"; 
+    const { data, error } = await db.auth.signInWithPassword({ 
 
-        await checkSession(); 
+      email, 
+
+      password 
 
     }); 
-
-} 
-
- 
-
-// ========================================== 
-
-// SITZUNG ÜBERPRÜFEN 
-
-// ========================================== 
-
- 
-
-async function checkSession() { 
-
-    const { data, error } = await db.auth.getSession(); 
 
  
 
     if (error) { 
 
-        console.error(error); 
+      showMessage("Anmeldung fehlgeschlagen: " + error.message, true); 
 
-        return; 
+      return; 
+
+    } 
+
+ 
+
+    try { 
+
+      await syncSession(data.session); 
+
+      passwordInput.value = ""; 
+
+    } catch (error) { 
+
+      showMessage(error.message, true); 
 
     } 
 
- 
-
-    const session = data.session; 
-
- 
-
-    if (session) { 
-
-        if (caseApp) caseApp.style.display = "block"; 
-
-        if (loginForm) loginForm.style.display = "none"; 
-
- 
-
-        await loadCases(); 
-
-    } else { 
-
-        if (caseApp) caseApp.style.display = "none"; 
-
-        if (loginForm) loginForm.style.display = "block"; 
-
-    } 
+  }); 
 
 } 
 
  
-
-// ========================================== 
 
 // ABMELDUNG 
 
-// ========================================== 
-
- 
-
 if (logoutBtn) { 
 
-    logoutBtn.addEventListener("click", async () => { 
+  logoutBtn.addEventListener("click", async () => { 
 
-        const { error } = await db.auth.signOut(); 
-
- 
-
-        if (error) { 
-
-            alert("Abmeldung fehlgeschlagen."); 
-
-            return; 
-
-        } 
+    showMessage("Abmeldung läuft ..."); 
 
  
 
-        await checkSession(); 
-
-    }); 
-
-} 
-
- 
-
-// ========================================== 
-
-// AKTENVERWALTUNG 
-
-// ========================================== 
-
- 
-
-async function loadCases() { 
-
-    if (!caseRows) return; 
-
- 
-
-    caseRows.innerHTML = "<tr><td colspan='5'>Akten werden geladen...</td></tr>"; 
-
- 
-
-    const { data, error } = await db 
-
-        .from("akten") 
-
-        .select("*") 
-
-        .order("erstellt_am", { ascending: false }); 
+    const { error } = await db.auth.signOut(); 
 
  
 
     if (error) { 
 
-        console.error("Aktenfehler:", error); 
+      showMessage("Abmeldung fehlgeschlagen: " + error.message, true); 
 
-        caseRows.innerHTML = 
-
-            "<tr><td colspan='5'>Akten konnten nicht geladen werden.</td></tr>"; 
-
-        return; 
+      return; 
 
     } 
 
  
 
-    if (!data || data.length === 0) { 
+    showLogin(); 
 
-        caseRows.innerHTML = 
+    showMessage("Du wurdest erfolgreich abgemeldet."); 
 
-            "<tr><td colspan='5'>Noch keine Akten vorhanden.</td></tr>"; 
-
-        return; 
-
-    } 
-
- 
-
-    caseRows.innerHTML = data.map((akte) => ` 
-
-        <tr> 
-
-            <td>${escapeHTML(akte.aktennummer)}</td> 
-
-            <td>${escapeHTML(akte.kategorie)}</td> 
-
-            <td>${escapeHTML(akte.datum)}</td> 
-
-            <td>${escapeHTML(akte.betreff)}</td> 
-
-            <td>${escapeHTML(akte.status)}</td> 
-
-        </tr> 
-
-    `).join(""); 
+  }); 
 
 } 
 
  
 
-// ========================================== 
-
-// SICHERE TEXTAUSGABE 
-
-// ========================================== 
-
- 
-
-function escapeHTML(value) { 
-
-    return String(value ?? "").replace(/[&<>"']/g, (char) => ({ 
-
-        "&": "&amp;", 
-
-        "<": "&lt;", 
-
-        ">": "&gt;", 
-
-        '"': "&quot;", 
-
-        "'": "&#039;" 
-
-    })[char]); 
-
-} 
-
- 
-
-// ========================================== 
-
-// AUTOMATISCHE SITZUNGSKONTROLLE 
-
-// ========================================== 
-
- 
+// ÄNDERUNGEN DER ANMELDUNG ERKENNEN 
 
 db.auth.onAuthStateChange((event, session) => { 
 
-    if (event === "SIGNED_OUT") { 
+  if (event === "SIGNED_IN" || 
 
-        checkSession(); 
+      event === "SIGNED_OUT" || 
 
-    } 
+      event === "TOKEN_REFRESHED") { 
 
- 
+    Promise.resolve().then(() => syncSession(session)); 
 
-    if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED") { 
-
-        checkSession(); 
-
-    } 
+  } 
 
 }); 
 
  
 
-// ========================================== 
-
 // WEBSITE STARTEN 
 
-// ========================================== 
+async function startWebsite() { 
+
+  showLogin(); 
 
  
 
-checkSession(); 
+  const { data, error } = await db.auth.getSession(); 
 
  
 
-console.log("Feldjäger-Website erfolgreich gestartet."); 
+  if (error) { 
 
-console.log("Divi-Leitung: NELE"); 
+    showMessage("Sitzung konnte nicht geprüft werden.", true); 
+
+    console.error(error); 
+
+    return; 
+
+  } 
+
+ 
+
+  await syncSession(data.session); 
+
+} 
+
+ 
+
+startWebsite(); 
+
+ 
+
+console.log("Feldjäger Ultimate Maxplus gestartet.");
