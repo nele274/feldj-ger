@@ -1,20 +1,16 @@
-<!DOCTYPE html> 
+<!doctype html> 
 
 <html lang="de"> 
 
 <head> 
 
-  <meta charset="UTF-8"> 
+  <meta charset="utf-8"> 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> 
 
   <meta name="theme-color" content="#111315"> 
 
- 
-
   <title>Feldjäger Ultimate Maxplus</title> 
-
- 
 
   <link rel="stylesheet" href="styles.css"> 
 
@@ -22,39 +18,37 @@
 
 </head> 
 
- 
-
 <body> 
 
  
 
-<header class="header"> 
+<header class="site-header"> 
 
-  <div class="logo"> 
+  <a class="brand" href="#start"> 
 
-    FELDJÄGER <span>ULTIMATE MAXPLUS</span> 
+    <span class="brand-mark">FJ</span> 
 
-  </div> 
+    <span>FELDJÄGER <small>ULTIMATE MAXPLUS</small></span> 
 
- 
+  </a> 
 
-  <nav> 
+  <nav id="publicNav" class="public-nav"> 
 
     <a href="#start">Start</a> 
 
     <a href="#leitung">Führung</a> 
 
-    <a href="#personal">Personal</a> 
-
-    <a href="#ausbildung">Ausbildung</a> 
+    <a href="#bewerbung">Bewerbung</a> 
 
     <a href="#regeln">Regelwerke</a> 
 
-    <a href="#dienst">Dienstplan</a> 
-
-    <a href="#akten">Login</a> 
+    <a href="#login">Login</a> 
 
   </nav> 
+
+  <button id="mobileNavToggle" class="icon-button" type="button" 
+
+    aria-label="Navigation öffnen">☰</button> 
 
 </header> 
 
@@ -62,53 +56,55 @@
 
 <main> 
 
- 
-
-  <!-- STARTBEREICH --> 
-
   <section id="start" class="hero"> 
 
-    <p class="orange">BUNDESWEHR ROLEPLAY</p> 
+    <div class="hero-copy"> 
 
- 
+      <p class="eyebrow">BUNDESWEHR ROLEPLAY · DIGITALE DIVISIONSVERWALTUNG</p> 
 
-    <h1>FELDJÄGER</h1> 
+      <h1>FELDJÄGER</h1> 
 
- 
+      <h2>Ultimate <span>Maxplus</span></h2> 
 
-    <h2>Ultimate Maxplus</h2> 
+      <p class="hero-lead"> 
 
- 
+        Ordnung. Disziplin. Verantwortung.<br> 
 
-    <p> 
+        Die zentrale Plattform für Führung, Personal und Dienstbetrieb. 
 
-      Ordnung. Disziplin. Verantwortung. 
+      </p> 
 
-      Das digitale Verwaltungssystem unserer Feldjäger-Division. 
+      <a class="button primary" href="#login">Zum internen Bereich →</a> 
 
-    </p> 
+    </div> 
 
- 
+    <div class="hero-panel"> 
 
-    <a href="#akten" class="button">Zum internen Bereich</a> 
+      <div class="hero-panel-top"><span class="live-dot"></span> SYSTEMPORTAL</div> 
+
+      <div class="hero-emblem">FJ</div> 
+
+      <p>FÜHRUNG · PERSONAL · DIENST</p> 
+
+      <small>Privates Roleplay-Projekt</small> 
+
+    </div> 
 
   </section> 
 
  
 
-  <!-- FÜHRUNG --> 
+  <section id="leitung" class="public-section"> 
 
-  <section id="leitung" class="section"> 
-
-    <p class="orange">ORGANISATION</p> 
+    <p class="eyebrow">ORGANISATION</p> 
 
     <h2>Divisionsführung</h2> 
 
- 
+    <div class="public-grid"> 
 
-    <div class="cards"> 
+      <article class="public-card"> 
 
-      <article class="card"> 
+        <span class="card-index">01</span> 
 
         <h3>Nele</h3> 
 
@@ -118,9 +114,9 @@
 
       </article> 
 
- 
+      <article class="public-card"> 
 
-      <article class="card"> 
+        <span class="card-index">02</span> 
 
         <h3>Luca</h3> 
 
@@ -130,9 +126,9 @@
 
       </article> 
 
- 
+      <article class="public-card"> 
 
-      <article class="card"> 
+        <span class="card-index">03</span> 
 
         <h3>Personalabteilung</h3> 
 
@@ -148,121 +144,43 @@
 
  
 
-  <!-- PERSONAL --> 
+  <section id="bewerbung" class="public-section muted-section"> 
 
-  <section id="personal" class="section"> 
+    <p class="eyebrow">MITWIRKEN</p> 
 
-    <p class="orange">PERSONAL</p> 
+    <h2>Bewerbungsportal</h2> 
 
-    <h2>Personalverwaltung</h2> 
+    <p class="section-intro"> 
 
- 
+      Bewerbungen werden über den vorgesehenen offiziellen Kontaktweg 
 
-    <div class="cards"> 
+      entgegengenommen. Die interne Bearbeitung erfolgt ausschließlich 
 
-      <article class="card"> 
+      durch berechtigte Stellen. 
 
-        <h3>Digitale Personalakten</h3> 
+    </p> 
 
-        <p>Geschützte Verwaltung aller Personalunterlagen.</p> 
+    <p class="notice"> 
 
-      </article> 
+      Das Bewerbungsformular wird eingerichtet, sobald der Kontaktweg 
 
- 
+      feststeht. 
 
-      <article class="card"> 
-
-        <h3>Mitarbeiterbewertungen</h3> 
-
-        <p>Leistung, Zuverlässigkeit und Engagement dokumentieren.</p> 
-
-      </article> 
-
- 
-
-      <article class="card"> 
-
-        <h3>Beförderungen</h3> 
-
-        <p>Vorschläge, Prüfungen und Genehmigungen verwalten.</p> 
-
-      </article> 
-
- 
-
-      <article class="card"> 
-
-        <h3>Organigramm</h3> 
-
-        <p>Die Führungsstruktur der Division im Überblick.</p> 
-
-      </article> 
-
-    </div> 
+    </p> 
 
   </section> 
 
  
 
-  <!-- AUSBILDUNG --> 
+  <section id="regeln" class="public-section"> 
 
-  <section id="ausbildung" class="section"> 
+    <p class="eyebrow">DOKUMENTE</p> 
 
-    <p class="orange">QUALIFIKATION</p> 
+    <h2>Regelwerke &amp; Ausbildung</h2> 
 
-    <h2>Ausbildung</h2> 
+    <div class="public-grid"> 
 
- 
-
-    <div class="cards"> 
-
-      <article class="card"> 
-
-        <h3>Grundausbildung</h3> 
-
-        <p>Grundlagen und Aufgaben der Feldjäger.</p> 
-
-      </article> 
-
- 
-
-      <article class="card"> 
-
-        <h3>Fortbildungen</h3> 
-
-        <p>Weiterentwicklung und Qualifikationen.</p> 
-
-      </article> 
-
- 
-
-      <article class="card"> 
-
-        <h3>Ausbildungsnachweise</h3> 
-
-        <p>Dokumentation abgeschlossener Ausbildungen.</p> 
-
-      </article> 
-
-    </div> 
-
-  </section> 
-
- 
-
-  <!-- REGELWERKE --> 
-
-  <section id="regeln" class="section"> 
-
-    <p class="orange">DOKUMENTE</p> 
-
-    <h2>Regelwerke und Dokumente</h2> 
-
- 
-
-    <div class="cards"> 
-
-      <article class="card"> 
+      <article class="public-card"> 
 
         <h3>Feldjäger-Regelwerk</h3> 
 
@@ -270,59 +188,19 @@
 
       </article> 
 
- 
-
-      <article class="card"> 
+      <article class="public-card"> 
 
         <h3>Divisionshandbuch</h3> 
 
-        <p>Aufbau und Organisation.</p> 
+        <p>Aufbau, Zuständigkeiten und Organisation.</p> 
 
       </article> 
 
- 
+      <article class="public-card"> 
 
-      <article class="card"> 
+        <h3>Ausbildungssystem</h3> 
 
-        <h3>Dokumentenarchiv</h3> 
-
-        <p>Interne Dokumente und Vorlagen.</p> 
-
-      </article> 
-
-    </div> 
-
-  </section> 
-
- 
-
-  <!-- DIENSTBETRIEB --> 
-
-  <section id="dienst" class="section"> 
-
-    <p class="orange">DIENSTBETRIEB</p> 
-
-    <h2>Dienstplan und Termine</h2> 
-
- 
-
-    <div class="cards"> 
-
-      <article class="card"> 
-
-        <h3>Wochenplan</h3> 
-
-        <p>Übersicht der geplanten Dienste und Veranstaltungen.</p> 
-
-      </article> 
-
- 
-
-      <article class="card"> 
-
-        <h3>Termine</h3> 
-
-        <p>Wichtige Termine und bevorstehende Veranstaltungen.</p> 
+        <p>Ausbildungsinhalte und Qualifikationsnachweise.</p> 
 
       </article> 
 
@@ -332,37 +210,43 @@
 
  
 
-  <!-- LOGIN --> 
+  <section id="login" class="login-section"> 
 
-  <section id="akten" class="section"> 
+    <div class="section-heading"> 
 
-    <p class="orange">INTERNER BEREICH</p> 
+      <p class="eyebrow">GESCHÜTZTER ZUGANG</p> 
 
-    <h2>Feldjäger Verwaltung</h2> 
+      <h2>Internes Verwaltungssystem</h2> 
 
- 
+      <p>Der Zugriff ist auf freigeschaltete Benutzer beschränkt.</p> 
 
-    <div class="card login" id="loginBox"> 
-
-      <h3>Mitglieder-Login</h3> 
+    </div> 
 
  
+
+    <div id="loginBox" class="login-card"> 
+
+      <h3>Anmelden</h3> 
 
       <form id="loginForm"> 
 
         <label for="email">E-Mail-Adresse</label> 
 
-        <input id="email" type="email" required> 
+        <input id="email" name="email" type="email" 
+
+          autocomplete="username" required> 
 
  
 
         <label for="password">Passwort</label> 
 
-        <input id="password" type="password" required> 
+        <input id="password" name="password" type="password" 
+
+          autocomplete="current-password" required> 
 
  
 
-        <button class="button" type="submit"> 
+        <button class="button primary full" type="submit" id="loginButton"> 
 
           Anmelden 
 
@@ -370,129 +254,107 @@
 
       </form> 
 
- 
+      <p id="authMessage" class="message" role="status" 
 
-      <p id="authMessage" role="status"></p> 
+        aria-live="polite"></p> 
 
     </div> 
 
  
 
-    <!-- INTERNES DASHBOARD --> 
+    <div id="caseApp" class="app-shell" hidden> 
 
-    <div id="caseApp" hidden> 
+      <aside class="sidebar"> 
 
- 
+        <div class="sidebar-user"> 
 
-      <div class="dashboard-header"> 
+          <span class="avatar" id="userAvatar">N</span> 
 
-        <div> 
+          <div> 
 
-          <p class="orange">ULTIMATE MAXPLUS</p> 
+            <strong id="currentUserName">Nutzer</strong> 
 
-          <h2>Internes Dashboard</h2> 
+            <small id="currentUserRole">Rolle</small> 
 
-          <p>Willkommen im geschützten Verwaltungsbereich.</p> 
+          </div> 
 
         </div> 
 
  
 
-        <button class="button" id="logoutBtn"> 
-
-          Abmelden 
-
-        </button> 
-
-      </div> 
+        <p class="side-label">VERWALTUNG</p> 
 
  
 
-      <div class="cards dashboard-cards"> 
+        <nav id="appNav" class="app-nav"> 
+
+          <button type="button" data-view="overview">Übersicht</button> 
+
+          <button type="button" data-view="personnel">Personalverwaltung</button> 
+
+          <button type="button" data-view="promotions">Beförderungen</button> 
+
+          <button type="button" data-view="evaluations">Bewertungen</button> 
+
+          <button type="button" data-view="approvals">Genehmigungen</button> 
+
+          <button type="button" data-view="messages">Nachrichten</button> 
+
+          <button type="button" data-view="calendar">Kalender &amp; Dienst</button> 
+
+          <button type="button" data-view="tasks">Aufgaben &amp; Fristen</button> 
+
+          <button type="button" data-view="files">Aktenregister</button> 
+
+          <button type="button" data-view="archive">Digitales Archiv</button> 
+
+          <button type="button" data-view="org">Organigramm</button> 
+
+          <button type="button" data-view="audit">Änderungsprotokoll</button> 
+
+          <button type="button" data-view="accounts" 
+
+            data-leadership-only="true">Konten &amp; Rollen</button> 
+
+        </nav> 
 
  
 
-        <article class="card"> 
+        <button id="logoutBtn" class="button ghost full logout-button" 
 
-          <h3>Personalverwaltung</h3> 
+          type="button">Abmelden</button> 
 
-          <p>Personalakten und Mitarbeiterdaten.</p> 
-
-        </article> 
+      </aside> 
 
  
 
-        <article class="card"> 
+      <section class="workspace"> 
 
-          <h3>Beförderungen</h3> 
+        <div class="workspace-top"> 
 
-          <p>Beförderungs- und Ernennungsvorschläge.</p> 
+          <div> 
 
-        </article> 
+            <p class="eyebrow">FELDJÄGER · ULTIMATE MAXPLUS</p> 
 
- 
+            <h2 id="viewTitle">Übersicht</h2> 
 
-        <article class="card"> 
+          </div> 
 
-          <h3>Bewertungen</h3> 
+          <span class="secure-label">● GESCHÜTZTE SITZUNG</span> 
 
-          <p>Mitarbeiterleistungen dokumentieren.</p> 
+        </div> 
 
-        </article> 
+        <div id="viewContent" class="view-content"> 
 
- 
+          <div class="loading">Dashboard wird geladen …</div> 
 
-        <article class="card"> 
+        </div> 
 
-          <h3>Genehmigungen</h3> 
-
-          <p>Offene Anträge und Entscheidungen.</p> 
-
-        </article> 
-
- 
-
-        <article class="card"> 
-
-          <h3>Personalabteilung</h3> 
-
-          <p>Interne Personalverwaltung.</p> 
-
-        </article> 
-
- 
-
-        <article class="card"> 
-
-          <h3>Digitales Archiv</h3> 
-
-          <p>Dokumente und abgeschlossene Vorgänge.</p> 
-
-        </article> 
-
- 
-
-      </div> 
-
- 
-
-      <div class="card"> 
-
-        <h3>Aktenregister</h3> 
-
-        <div id="caseRows"></div> 
-
-      </div> 
-
- 
+      </section> 
 
     </div> 
 
- 
-
   </section> 
-
- 
 
 </main> 
 
@@ -500,9 +362,9 @@
 
 <footer> 
 
-  <p>FELDJÄGER · ULTIMATE MAXPLUS</p> 
+  <strong>FELDJÄGER · ULTIMATE MAXPLUS</strong> 
 
-  <p>Privates Roleplay-Projekt – keine offizielle Bundeswehr-Website.</p> 
+  <span>Privates Roleplay-Projekt – keine offizielle Bundeswehr-Website.</span> 
 
 </footer> 
 
@@ -510,76 +372,6 @@
 
 <script src="script.js"></script> 
 
- 
-
 </body> 
 
 </html> 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const dashboard = document.querySelector(".dashboard-cards");
-  if (!dashboard) return;
-
-  const titles = [
-    "Personalverwaltung",
-    "Beförderungen",
-    "Bewertungen",
-    "Genehmigungen",
-    "Personalabteilung",
-    "Digitales Archiv"
-  ];
-
-  const descriptions = [
-    "Hier werden Mitarbeiterdaten und Personalakten verwaltet.",
-    "Hier werden Beförderungen und Ernennungen bearbeitet.",
-    "Hier können Mitarbeiterbewertungen erstellt werden.",
-    "Hier werden Anträge geprüft und genehmigt.",
-    "Hier befindet sich die interne Personalverwaltung.",
-    "Hier werden Dokumente und abgeschlossene Vorgänge verwaltet."
-  ];
-
-  const cards = dashboard.querySelectorAll(".card");
-  const panel = document.createElement("div");
-  panel.className = "card";
-  panel.hidden = true;
-  dashboard.after(panel);
-
-  cards.forEach((card, index) => {
-    card.style.cursor = "pointer";
-    card.setAttribute("role", "button");
-    card.setAttribute("tabindex", "0");
-
-    function openPanel() {
-      dashboard.hidden = true;
-
-      const register = document.getElementById("caseRows")
-        ?.parentElement;
-      if (register) register.hidden = true;
-
-      panel.hidden = false;
-      panel.innerHTML = `
-        <h2>${titles[index]}</h2>
-        <p>${descriptions[index]}</p>
-        <button class="button" type="button" id="backDashboard">
-          Zurück zum Dashboard
-        </button>
-      `;
-
-      document.getElementById("backDashboard")
-        .addEventListener("click", () => {
-          panel.hidden = true;
-          dashboard.hidden = false;
-          if (register) register.hidden = false;
-        });
-    }
-
-    card.addEventListener("click", openPanel);
-    card.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openPanel();
-      }
-    });
-  });
-});
-</script>
