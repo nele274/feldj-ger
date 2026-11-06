@@ -20,35 +20,39 @@
 
  
 
-{ 
+/* GRUNDEINSTELLUNGEN */ 
 
-  Box-sizing: border-box; 
+ 
 
-  Margin: 0; 
+* { 
 
-  Padding: 0; 
+  box-sizing: border-box; 
+
+  margin: 0; 
+
+  padding: 0; 
 
 } 
 
  
 
-Html { 
+html { 
 
-  Scroll-behavior: smooth; 
+  scroll-behavior: smooth; 
 
 } 
 
  
 
-Body { 
+body { 
 
-  Background: var(--bg); 
+  background: var(--bg); 
 
-  Color: var(--text); 
+  color: var(--text); 
 
-  Font-family: Arial, sans-serif; 
+  font-family: Arial, sans-serif; 
 
-  Line-height: 1.65; 
+  line-height: 1.65; 
 
 } 
 
@@ -56,7 +60,59 @@ Body {
 
 [hidden] { 
 
-  Display: none !important; 
+  display: none !important; 
+
+} 
+
+ 
+
+/* KEIN STÖRENDER SCHREIBCURSOR */ 
+
+ 
+
+html, 
+
+body, 
+
+a, 
+
+button, 
+
+.card { 
+
+  caret-color: transparent; 
+
+} 
+
+ 
+
+a, 
+
+button, 
+
+.card { 
+
+  -webkit-user-select: none; 
+
+  user-select: none; 
+
+} 
+
+ 
+
+input, 
+
+textarea, 
+
+select, 
+
+[contenteditable="true"] { 
+
+  caret-color: auto !important; 
+
+  -webkit-user-select: text; 
+
+  user-select: text; 
 
 } 
 
@@ -68,13 +124,13 @@ Body {
 
 .header { 
 
-  Position: sticky; 
+  position: sticky; 
 
-  Top: 0; 
+  top: 0; 
 
   z-index: 100; 
 
-  background: rgba(15, 18, 21, .96); 
+  background: rgba(15, 18, 21, 0.96); 
 
   backdrop-filter: blur(12px); 
 
@@ -98,11 +154,11 @@ Body {
 
 .logo { 
 
-  Font-size: 20px; 
+  font-size: 20px; 
 
-  Font-weight: 900; 
+  font-weight: 900; 
 
-  Letter-spacing: 2px; 
+  letter-spacing: 2px; 
 
 } 
 
@@ -110,43 +166,43 @@ Body {
 
 .logo span { 
 
-  Color: var(--orange); 
+  color: var(--orange); 
 
 } 
 
  
 
-Nav { 
+nav { 
 
-  Display: flex; 
+  display: flex; 
 
-  Flex-wrap: wrap; 
+  flex-wrap: wrap; 
 
-  Gap: 20px; 
-
-} 
-
- 
-
-Nav a { 
-
-  Color: var(--muted); 
-
-  Text-decoration: none; 
-
-  Font-size: 13px; 
-
-  Font-weight: bold; 
-
-  Transition: .2s; 
+  gap: 20px; 
 
 } 
 
  
 
-Nav a:hover { 
+nav a { 
 
-  Color: var(--orange); 
+  color: var(--muted); 
+
+  text-decoration: none; 
+
+  font-size: 13px; 
+
+  font-weight: bold; 
+
+  transition: 0.2s; 
+
+} 
+
+ 
+
+nav a:hover { 
+
+  color: var(--orange); 
 
 } 
 
@@ -158,21 +214,21 @@ Nav a:hover {
 
 .hero { 
 
-  Min-height: 540px; 
+  min-height: 540px; 
 
-  Padding: 100px 8%; 
+  padding: 100px 8%; 
 
-  Display: flex; 
+  display: flex; 
 
-  Flex-direction: column; 
+  flex-direction: column; 
 
-  Align-items: flex-start; 
+  align-items: flex-start; 
 
-  Justify-content: center; 
+  justify-content: center; 
 
-  Background: 
+  background: 
 
-    Linear-gradient(90deg, #0c0e10 15%, rgba(12,14,16,.72)), 
+    linear-gradient(90deg, #0c0e10 15%, rgba(12,14,16,.72)), 
 
     radial-gradient(circle at 80% 40%, #743b0e, #17100a 45%, #0c0e10 75%); 
 
@@ -184,13 +240,13 @@ Nav a:hover {
 
 .orange { 
 
-  Color: var(--orange); 
+  color: var(--orange); 
 
-  Font-weight: 800; 
+  font-weight: 800; 
 
-  Letter-spacing: 3px; 
+  letter-spacing: 3px; 
 
-  Font-size: 12px; 
+  font-size: 12px; 
 
 } 
 
@@ -198,15 +254,15 @@ Nav a:hover {
 
 .hero h1 { 
 
-  Font-size: clamp(48px, 10vw, 100px); 
+  font-size: clamp(48px, 10vw, 100px); 
 
-  Color: var(--orange); 
+  color: var(--orange); 
 
-  Line-height: 1.05; 
+  line-height: 1.05; 
 
-  Margin: 15px 0; 
+  margin: 15px 0; 
 
-  Letter-spacing: 3px; 
+  letter-spacing: 3px; 
 
 } 
 
@@ -214,9 +270,9 @@ Nav a:hover {
 
 .hero h2 { 
 
-  Font-size: clamp(22px, 4vw, 34px); 
+  font-size: clamp(22px, 4vw, 34px); 
 
-  Margin-bottom: 18px; 
+  margin-bottom: 18px; 
 
 } 
 
@@ -224,9 +280,9 @@ Nav a:hover {
 
 .hero p { 
 
-  Max-width: 650px; 
+  max-width: 650px; 
 
-  Color: #c4c8cb; 
+  color: #c4c8cb; 
 
 } 
 
@@ -238,27 +294,27 @@ Nav a:hover {
 
 .button { 
 
-  Display: inline-block; 
+  display: inline-block; 
 
-  Margin-top: 22px; 
+  margin-top: 22px; 
 
-  Padding: 13px 24px; 
+  padding: 13px 24px; 
 
-  Background: var(--orange); 
+  background: var(--orange); 
 
-  Color: #111315; 
+  color: #111315; 
 
-  Border: none; 
+  border: none; 
 
-  Border-radius: 7px; 
+  border-radius: 7px; 
 
-  Font-weight: 800; 
+  font-weight: 800; 
 
-  Text-decoration: none; 
+  text-decoration: none; 
 
-  Cursor: pointer; 
+  cursor: pointer; 
 
-  Transition: .2s; 
+  transition: 0.2s; 
 
 } 
 
@@ -266,23 +322,23 @@ Nav a:hover {
 
 .button:hover { 
 
-  Background: var(--orange-light); 
+  background: var(--orange-light); 
 
-  Transform: translateY(-2px); 
+  transform: translateY(-2px); 
 
 } 
 
  
 
-/* SECTIONS */ 
+/* ABSCHNITTE */ 
 
  
 
 .section { 
 
-  Padding: 75px 7%; 
+  padding: 75px 7%; 
 
-  Scroll-margin-top: 95px; 
+  scroll-margin-top: 95px; 
 
 } 
 
@@ -290,25 +346,25 @@ Nav a:hover {
 
 .section h2 { 
 
-  Font-size: clamp(27px, 4vw, 38px); 
+  font-size: clamp(27px, 4vw, 38px); 
 
-  Margin: 8px 0 28px; 
+  margin: 8px 0 28px; 
 
 } 
 
  
 
-/* CARDS */ 
+/* KARTEN */ 
 
  
 
 .cards { 
 
-  Display: grid; 
+  display: grid; 
 
-  Grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); 
 
-  Gap: 20px; 
+  gap: 20px; 
 
 } 
 
@@ -316,15 +372,23 @@ Nav a:hover {
 
 .card { 
 
-  Background: linear-gradient(145deg, var(--surface-light), var(--surface)); 
+  background: linear-gradient( 
 
-  Border: 1px solid var(--border); 
+    145deg, 
 
-  Border-radius: 13px; 
+    var(--surface-light), 
 
-  Padding: 25px; 
+    var(--surface) 
 
-  Transition: .25s; 
+  ); 
+
+  border: 1px solid var(--border); 
+
+  border-radius: 13px; 
+
+  padding: 25px; 
+
+  transition: 0.25s; 
 
 } 
 
@@ -332,11 +396,11 @@ Nav a:hover {
 
 .card:hover { 
 
-  Border-color: var(--orange); 
+  border-color: var(--orange); 
 
-  Transform: translateY(-3px); 
+  transform: translateY(-3px); 
 
-  Box-shadow: 0 8px 25px rgba(0,0,0,.2); 
+  box-shadow: 0 8px 25px rgba(0,0,0,.2); 
 
 } 
 
@@ -344,11 +408,11 @@ Nav a:hover {
 
 .card h3 { 
 
-  Color: var(--orange); 
+  color: var(--orange); 
 
-  Font-size: 20px; 
+  font-size: 20px; 
 
-  Margin-bottom: 10px; 
+  margin-bottom: 10px; 
 
 } 
 
@@ -356,7 +420,7 @@ Nav a:hover {
 
 .card p { 
 
-  Color: var(--muted); 
+  color: var(--muted); 
 
 } 
 
@@ -364,11 +428,11 @@ Nav a:hover {
 
 .card strong { 
 
-  Display: block; 
+  display: block; 
 
-  Margin-top: 12px; 
+  margin-top: 12px; 
 
-  Color: var(--orange-light); 
+  color: var(--orange-light); 
 
 } 
 
@@ -380,61 +444,69 @@ Nav a:hover {
 
 .login { 
 
-  Max-width: 500px; 
+  max-width: 500px; 
 
 } 
 
  
 
-Form { 
+form { 
 
-  Display: flex; 
+  display: flex; 
 
-  Flex-direction: column; 
+  flex-direction: column; 
 
-  Gap: 11px; 
+  gap: 11px; 
 
-  Margin-top: 18px; 
-
-} 
-
- 
-
-Label { 
-
-  Font-size: 13px; 
-
-  Font-weight: bold; 
-
-  Color: #d5d9dc; 
+  margin-top: 18px; 
 
 } 
 
  
 
-Input { 
+label { 
 
-  Width: 100%; 
+  font-size: 13px; 
 
-  Padding: 13px; 
+  font-weight: bold; 
 
-  Background: #0d1012; 
-
-  Color: white; 
-
-  Border: 1px solid #414950; 
-
-  Border-radius: 7px; 
+  color: #d5d9dc; 
 
 } 
 
  
 
-Input:focus { 
+input, 
 
-  Outline: 1px solid var(--orange); 
+textarea, 
 
-  Border-color: var(--orange); 
+select { 
+
+  width: 100%; 
+
+  padding: 13px; 
+
+  background: #0d1012; 
+
+  color: white; 
+
+  border: 1px solid #414950; 
+
+  border-radius: 7px; 
+
+} 
+
+ 
+
+input:focus, 
+
+textarea:focus, 
+
+select:focus { 
+
+  outline: 1px solid var(--orange); 
+
+  border-color: var(--orange); 
 
 } 
 
@@ -442,9 +514,9 @@ Input:focus {
 
 #authMessage { 
 
-  Margin-top: 15px; 
+  margin-top: 15px; 
 
-  Color: var(--orange-light); 
+  color: var(--orange-light); 
 
 } 
 
@@ -456,7 +528,7 @@ Input:focus {
 
 #caseApp { 
 
-  Margin-top: 30px; 
+  margin-top: 30px; 
 
 } 
 
@@ -464,25 +536,25 @@ Input:focus {
 
 .dashboard-header { 
 
-  Display: flex; 
+  display: flex; 
 
-  Justify-content: space-between; 
+  justify-content: space-between; 
 
-  Align-items: center; 
+  align-items: center; 
 
-  Flex-wrap: wrap; 
+  flex-wrap: wrap; 
 
-  Gap: 20px; 
+  gap: 20px; 
 
-  Margin-bottom: 28px; 
+  margin-bottom: 28px; 
 
-  Padding: 28px; 
+  padding: 28px; 
 
-  Background: linear-gradient(120deg, #292016, #171b1e); 
+  background: linear-gradient(120deg, #292016, #171b1e); 
 
-  Border: 1px solid #75451f; 
+  border: 1px solid #75451f; 
 
-  Border-radius: 13px; 
+  border-radius: 13px; 
 
 } 
 
@@ -490,7 +562,7 @@ Input:focus {
 
 .dashboard-header h2 { 
 
-  Margin: 5px 0; 
+  margin: 5px 0; 
 
 } 
 
@@ -498,7 +570,7 @@ Input:focus {
 
 .dashboard-header .button { 
 
-  Margin-top: 0; 
+  margin-top: 0; 
 
 } 
 
@@ -506,29 +578,37 @@ Input:focus {
 
 .dashboard-cards { 
 
-  Margin-bottom: 30px; 
+  margin-bottom: 30px; 
 
 } 
 
  
 
-/* NOTICE / STATUS */ 
+.dashboard-cards .card { 
+
+  cursor: pointer; 
+
+} 
 
  
 
-.notice { 
+/* HINWEISE */ 
 
-  Background: #292018; 
+ 
 
-  Border-left: 4px solid var(--orange); 
+.beachten { 
 
-  Padding: 18px; 
+  background: #292018; 
 
-  Margin-top: 22px; 
+  border-left: 4px solid var(--orange); 
 
-  Color: #ddd; 
+  padding: 18px; 
 
-  Border-radius: 6px; 
+  margin-top: 22px; 
+
+  color: #ddd; 
+
+  border-radius: 6px; 
 
 } 
 
@@ -540,37 +620,49 @@ Input:focus {
 
 #caseRows { 
 
-  Margin-top: 18px; 
+  margin-top: 18px; 
 
-  Overflow-x: auto; 
-
-} 
-
- 
-
-/* FOOTER */ 
-
- 
-
-Footer { 
-
-  Padding: 32px 7%; 
-
-  Background: #121619; 
-
-  Border-top: 2px solid var(--orange); 
-
-  Color: var(--muted); 
-
-  Font-size: 13px; 
-
-  Text-align: center; 
+  overflow-x: auto; 
 
 } 
 
  
 
-/* MOBILE */ 
+/* FUSSZEILE */ 
+
+ 
+
+footer { 
+
+  padding: 32px 7%; 
+
+  background: #121619; 
+
+  border-top: 2px solid var(--orange); 
+
+  color: var(--muted); 
+
+  font-size: 13px; 
+
+  text-align: center; 
+
+} 
+
+ 
+
+/* FOKUS OHNE STÖRENDE MARKIERUNG */ 
+
+ 
+
+*:focus:not(input):not(textarea):not(select):not(a):not(button) { 
+
+  outline: none; 
+
+} 
+
+ 
+
+/* MOBIL */ 
 
  
 
@@ -578,11 +670,11 @@ Footer {
 
   .header { 
 
-    Position: relative; 
+    position: relative; 
 
-    Align-items: flex-start; 
+    align-items: flex-start; 
 
-    Flex-direction: column; 
+    flex-direction: column; 
 
   } 
 
@@ -590,23 +682,23 @@ Footer {
 
   .logo { 
 
-    Font-size: 17px; 
+    font-size: 17px; 
 
   } 
 
  
 
-  Nav { 
+  nav { 
 
-    Gap: 12px; 
+    gap: 12px; 
 
   } 
 
  
 
-  Nav a { 
+  nav a { 
 
-    Font-size: 12px; 
+    font-size: 12px; 
 
   } 
 
@@ -614,9 +706,9 @@ Footer {
 
   .hero { 
 
-    Min-height: 420px; 
+    min-height: 420px; 
 
-    Padding: 75px 7%; 
+    padding: 75px 7%; 
 
   } 
 
@@ -624,7 +716,7 @@ Footer {
 
   .section { 
 
-    Padding: 55px 6%; 
+    padding: 55px 6%; 
 
   } 
 
@@ -632,7 +724,7 @@ Footer {
 
   .cards { 
 
-    Grid-template-columns: 1fr; 
+    grid-template-columns: 1fr; 
 
   } 
 
@@ -640,44 +732,20 @@ Footer {
 
   .dashboard-header { 
 
-    Align-items: flex-start; 
+    align-items: flex-start; 
 
-    Flex-direction: column; 
+    flex-direction: column; 
+
+  } 
+
+ 
+
+  .dashboard-header .button { 
+
+    width: 100%; 
+
+    text-align: center; 
 
   } 
 
 } 
-/* Kein blinkender Schreibcursor beim normalen Anklicken */
-html,
-body,
-a,
-button,
-.card,
-.nav-link,
-.dashboard-card {
-  caret-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* In Eingabefeldern darf man weiterhin schreiben */
-input,
-textarea,
-select,
-[contenteditable="true"] {
-  caret-color: auto;
-  user-select: text;
-  -webkit-user-select: text;
-}
-/* Fokus-Markierung bei normalen Klicks entfernen */
-*:focus:not(input):not(textarea):not(select):not([contenteditable="true"]) {
-  outline: none !important;
-  caret-color: transparent !important;
-}
-
-/* Schreibcursor nur in Eingabefeldern */
-input,
-textarea,
-[contenteditable="true"] {
-  caret-color: auto !important;
-}
