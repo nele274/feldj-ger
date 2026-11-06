@@ -1,16 +1,18 @@
-// ========================================== 
+// ======================================== 
 
 // FELDJÄGER ULTIMATE MAXPLUS 
 
-// Anmeldung und Sitzungsverwaltung 
+// SUPABASE + LOGIN + AKTENREGISTER 
 
-// ========================================== 
+// ======================================== 
 
  
 
 const SUPABASE_URL = "https://vpxgjzbptfnsrzrnxndo.supabase.co"; 
 
-const SUPABASE_ANON_KEY = "sb_publishable_bo68zX2qVANCUemJOD977Q_I_2dSNF-"; 
+ 
+
+const SUPABASE_KEY = "sb_publishable_bo68zX2qVANCUemJOD977Q_I_2dSNF-"; 
 
  
 
@@ -18,129 +20,63 @@ const db = window.supabase.createClient(
 
   SUPABASE_URL, 
 
-  SUPABASE_ANON_KEY 
+  SUPABASE_KEY 
 
 ); 
 
  
 
-// HTML-Elemente 
-
-const loginForm = document.getElementById("loginForm"); 
-
-const loginBox = document.getElementById("loginBox"); 
-
-const emailInput = document.getElementById("email"); 
-
-const passwordInput = document.getElementById("password"); 
-
-const authMessage = document.getElementById("authMessage"); 
-
-const caseApp = document.getElementById("caseApp"); 
-
-const logoutBtn = document.getElementById("logoutBtn"); 
-
-const caseRows = document.getElementById("caseRows"); 
+window.db = db; 
 
  
 
-// Rollenbezeichnungen 
+let currentUser = null; 
 
-const ROLE_NAMES = { 
-
-  admin: "Divisionsleitung", 
-
-  deputy: "Stellvertretung", 
-
-  personnel: "Personalabteilung", 
-
-  leader: "Führungskraft", 
-
-  member: "Mitglied" 
-
-}; 
+let currentProfile = null; 
 
  
 
-// Nachricht anzeigen 
+// ======================================== 
+
+// MELDUNGEN 
+
+// ======================================== 
+
+ 
 
 function showMessage(message, isError = false) { 
 
-  if (!authMessage) return; 
+  const element = document.getElementById("authMessage"); 
 
  
 
-  authMessage.textContent = message; 
+  if (!element) return; 
 
-  authMessage.style.color = isError ? "#ff7777" : "#ffad52"; 
+ 
+
+  element.textContent = message; 
+
+  element.style.color = isError ? "#ff6464" : "#ffad52"; 
 
 } 
 
  
 
-// Dashboard anzeigen oder verbergen 
+// ======================================== 
 
-function showDashboard(profile) { 
+// LOGIN ANZEIGEN 
 
-  if (loginBox) loginBox.hidden = true; 
-
-  if (caseApp) caseApp.hidden = false; 
+// ======================================== 
 
  
-
-  if (!profile) return; 
-
- 
-
-  const dashboardHeader = document.querySelector(".dashboard-header"); 
-
- 
-
-  if (dashboardHeader) { 
-
-    let profileInfo = document.getElementById("profileInfo"); 
-
- 
-
-    if (!profileInfo) { 
-
-      profileInfo = document.createElement("p"); 
-
-      profileInfo.id = "profileInfo"; 
-
-      dashboardHeader.appendChild(profileInfo); 
-
-    } 
-
- 
-
-    const name = profile.display_name || profile.username || "Mitglied"; 
-
-    const role = ROLE_NAMES[profile.role] || "Unbekannte Rolle"; 
-
- 
-
-    profileInfo.textContent = `Angemeldet als: ${name} · ${role}`; 
-
-  } 
-
- 
-
-  if (caseRows) { 
-
-    caseRows.textContent = 
-
-      "Die Aktenmodule werden nach Einrichtung der Datenbankrechte aktiviert."; 
-
-  } 
-
-} 
-
- 
-
-// Login anzeigen 
 
 function showLogin() { 
+
+  const loginBox = document.getElementById("loginBox"); 
+
+  const caseApp = document.getElementById("caseApp"); 
+
+ 
 
   if (loginBox) loginBox.hidden = false; 
 
@@ -150,7 +86,37 @@ function showLogin() {
 
  
 
-// Benutzerprofil laden 
+// ======================================== 
+
+// DASHBOARD ANZEIGEN 
+
+// ======================================== 
+
+ 
+
+function showDashboard() { 
+
+  const loginBox = document.getElementById("loginBox"); 
+
+  const caseApp = document.getElementById("caseApp"); 
+
+ 
+
+  if (loginBox) loginBox.hidden = true; 
+
+  if (caseApp) caseApp.hidden = false; 
+
+} 
+
+ 
+
+// ======================================== 
+
+// BENUTZERPROFIL LADEN 
+
+// ======================================== 
+
+ 
 
 async function loadProfile(userId) { 
 
@@ -158,7 +124,7 @@ async function loadProfile(userId) {
 
     .from("profiles") 
 
-    .select("id, display_name, username, role") 
+    .select("id, display_name, username, role, created_at") 
 
     .eq("id", userId) 
 
@@ -170,19 +136,7 @@ async function loadProfile(userId) {
 
     console.error("Profilfehler:", error); 
 
-    throw new Error("Dein Benutzerprofil konnte nicht geladen werden."); 
-
-  } 
-
- 
-
-  if (!data) { 
-
-    throw new Error( 
-
-      "Für dieses Konto wurde noch kein Benutzerprofil eingerichtet." 
-
-    ); 
+    return null; 
 
   } 
 
@@ -194,11 +148,61 @@ async function loadProfile(userId) {
 
  
 
-// Aktuelle Sitzung verarbeiten 
+// ======================================== 
+
+// ROLLEN PRÜFEN 
+
+// ======================================== 
+
+ 
+
+function getUserRole() { 
+
+  return currentProfile?.role || "member"; 
+
+} 
+
+ 
+
+function isLeadership() { 
+
+  return ["admin", "deputy"].includes(getUserRole()); 
+
+} 
+
+ 
+
+function isPersonnelDepartment() { 
+
+  return getUserRole() === "personalabteilung"; 
+
+} 
+
+ 
+
+function hasPersonnelAccess() { 
+
+  return isLeadership() || isPersonnelDepartment(); 
+
+} 
+
+ 
+
+// ======================================== 
+
+// SITZUNG VERARBEITEN 
+
+// ======================================== 
+
+ 
 
 async function syncSession(session) { 
 
   if (!session) { 
+
+    currentUser = null; 
+
+    currentProfile = null; 
 
     showLogin(); 
 
@@ -208,41 +212,231 @@ async function syncSession(session) {
 
  
 
-  try { 
+  currentUser = session.user; 
 
-    const profile = await loadProfile(session.user.id); 
+ 
 
-    showDashboard(profile); 
+  currentProfile = await loadProfile(currentUser.id); 
 
-  } catch (error) { 
+ 
 
-    showLogin(); 
+  showDashboard(); 
 
-    showMessage(error.message, true); 
+ 
+
+  const dashboardHeader = document.querySelector( 
+
+    ".dashboard-header" 
+
+  ); 
+
+ 
+
+  if (dashboardHeader) { 
+
+    const heading = dashboardHeader.querySelector("h2"); 
+
+ 
+
+    if (heading) { 
+
+      const displayName = 
+
+        currentProfile?.display_name || 
+
+        currentProfile?.username || 
+
+        currentUser.email; 
+
+ 
+
+      heading.textContent = "Willkommen, " + displayName; 
+
+    } 
 
   } 
+
+ 
+
+  await loadAkten(); 
 
 } 
 
  
 
-// ANMELDUNG 
+// ======================================== 
+
+// AKTENREGISTER LADEN 
+
+// ======================================== 
+
+ 
+
+async function loadAkten() { 
+
+  const container = document.getElementById("caseRows"); 
+
+ 
+
+  if (!container) return; 
+
+ 
+
+  container.textContent = "Akten werden geladen ..."; 
+
+ 
+
+  const { data, error } = await db 
+
+    .from("akten") 
+
+    .select("id, aktennummer, kategorie, betreff, status, erstellt_am") 
+
+    .order("erstellt_am", { ascending: false }); 
+
+ 
+
+  if (error) { 
+
+    console.error("Aktenfehler:", error); 
+
+ 
+
+    container.textContent = 
+
+      "Akten konnten nicht geladen werden. Bitte Berechtigungen prüfen."; 
+
+ 
+
+    return; 
+
+  } 
+
+ 
+
+  if (!data || data.length === 0) { 
+
+    container.textContent = "Noch keine Akten vorhanden."; 
+
+    return; 
+
+  } 
+
+ 
+
+  const table = document.createElement("table"); 
+
+  const header = document.createElement("tr"); 
+
+ 
+
+  [ 
+
+    "Aktennummer", 
+
+    "Kategorie", 
+
+    "Betreff", 
+
+    "Status", 
+
+    "Erstellt am" 
+
+  ].forEach(label => { 
+
+    const th = document.createElement("th"); 
+
+    th.textContent = label; 
+
+    header.appendChild(th); 
+
+  }); 
+
+ 
+
+  table.appendChild(header); 
+
+ 
+
+  data.forEach(akte => { 
+
+    const row = document.createElement("tr"); 
+
+ 
+
+    const values = [ 
+
+      akte.aktennummer, 
+
+      akte.kategorie, 
+
+      akte.betreff, 
+
+      akte.status, 
+
+      akte.erstellt_am 
+
+        ? new Date(akte.erstellt_am).toLocaleDateString("de-DE") 
+
+        : "-" 
+
+    ]; 
+
+ 
+
+    values.forEach(value => { 
+
+      const cell = document.createElement("td"); 
+
+      cell.textContent = value ?? "-"; 
+
+      cell.style.padding = "10px"; 
+
+      row.appendChild(cell); 
+
+    }); 
+
+ 
+
+    table.appendChild(row); 
+
+  }); 
+
+ 
+
+  container.replaceChildren(table); 
+
+} 
+
+ 
+
+// ======================================== 
+
+// ANMELDEN 
+
+// ======================================== 
+
+ 
+
+const loginForm = document.getElementById("loginForm"); 
+
+ 
 
 if (loginForm) { 
 
-  loginForm.addEventListener("submit", async (event) => { 
+  loginForm.addEventListener("submit", async event => { 
 
     event.preventDefault(); 
 
  
 
-    const email = emailInput.value.trim(); 
+    const email = document.getElementById("email").value.trim(); 
 
-    const password = passwordInput.value; 
+    const password = document.getElementById("password").value; 
 
  
 
-    showMessage("Anmeldung läuft ..."); 
+    showMessage("Anmeldung wird geprüft ..."); 
 
  
 
@@ -258,7 +452,13 @@ if (loginForm) {
 
     if (error) { 
 
-      showMessage("Anmeldung fehlgeschlagen: " + error.message, true); 
+      showMessage( 
+
+        "Anmeldung fehlgeschlagen: " + error.message, 
+
+        true 
+
+      ); 
 
       return; 
 
@@ -266,17 +466,11 @@ if (loginForm) {
 
  
 
-    try { 
+    await syncSession(data.session); 
 
-      await syncSession(data.session); 
+ 
 
-      passwordInput.value = ""; 
-
-    } catch (error) { 
-
-      showMessage(error.message, true); 
-
-    } 
+    showMessage("Erfolgreich angemeldet."); 
 
   }); 
 
@@ -284,15 +478,21 @@ if (loginForm) {
 
  
 
-// ABMELDUNG 
+// ======================================== 
+
+// ABMELDEN 
+
+// ======================================== 
+
+ 
+
+const logoutBtn = document.getElementById("logoutBtn"); 
+
+ 
 
 if (logoutBtn) { 
 
   logoutBtn.addEventListener("click", async () => { 
-
-    showMessage("Abmeldung läuft ..."); 
-
- 
 
     const { error } = await db.auth.signOut(); 
 
@@ -300,7 +500,7 @@ if (logoutBtn) {
 
     if (error) { 
 
-      showMessage("Abmeldung fehlgeschlagen: " + error.message, true); 
+      showMessage("Abmeldung fehlgeschlagen.", true); 
 
       return; 
 
@@ -308,9 +508,15 @@ if (logoutBtn) {
 
  
 
+    currentUser = null; 
+
+    currentProfile = null; 
+
+ 
+
     showLogin(); 
 
-    showMessage("Du wurdest erfolgreich abgemeldet."); 
+    showMessage("Du wurdest abgemeldet."); 
 
   }); 
 
@@ -318,25 +524,13 @@ if (logoutBtn) {
 
  
 
-// ÄNDERUNGEN DER ANMELDUNG ERKENNEN 
-
-db.auth.onAuthStateChange((event, session) => { 
-
-  if (event === "SIGNED_IN" || 
-
-      event === "SIGNED_OUT" || 
-
-      event === "TOKEN_REFRESHED") { 
-
-    Promise.resolve().then(() => syncSession(session)); 
-
-  } 
-
-}); 
-
- 
+// ======================================== 
 
 // WEBSITE STARTEN 
+
+// ======================================== 
+
+ 
 
 async function startWebsite() { 
 
@@ -370,4 +564,4 @@ startWebsite();
 
  
 
-console.log("Feldjäger Ultimate Maxplus gestartet.");
+console.log("Feldjäger Ultimate Maxplus gestartet."); 
