@@ -1127,3 +1127,25 @@ footer p {
   } 
 
 } 
+/* Schreibcursor bei normalen Elementen entfernen */
+*:not(input):not(textarea):not(select):not([contenteditable="true"]) {
+  caret-color: transparent !important;
+}
+
+/* Keine Textmarkierung bei Buttons und Kacheln */
+button,
+a,
+.card,
+.module-card,
+article {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Eingabefelder behalten ihren normalen Schreibcursor */
+input,
+textarea,
+select {
+  caret-color: auto !important;
+  user-select: text;
+}
