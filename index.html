@@ -515,3 +515,71 @@
 </body> 
 
 </html> 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const dashboard = document.querySelector(".dashboard-cards");
+  if (!dashboard) return;
+
+  const titles = [
+    "Personalverwaltung",
+    "Beförderungen",
+    "Bewertungen",
+    "Genehmigungen",
+    "Personalabteilung",
+    "Digitales Archiv"
+  ];
+
+  const descriptions = [
+    "Hier werden Mitarbeiterdaten und Personalakten verwaltet.",
+    "Hier werden Beförderungen und Ernennungen bearbeitet.",
+    "Hier können Mitarbeiterbewertungen erstellt werden.",
+    "Hier werden Anträge geprüft und genehmigt.",
+    "Hier befindet sich die interne Personalverwaltung.",
+    "Hier werden Dokumente und abgeschlossene Vorgänge verwaltet."
+  ];
+
+  const cards = dashboard.querySelectorAll(".card");
+  const panel = document.createElement("div");
+  panel.className = "card";
+  panel.hidden = true;
+  dashboard.after(panel);
+
+  cards.forEach((card, index) => {
+    card.style.cursor = "pointer";
+    card.setAttribute("role", "button");
+    card.setAttribute("tabindex", "0");
+
+    function openPanel() {
+      dashboard.hidden = true;
+
+      const register = document.getElementById("caseRows")
+        ?.parentElement;
+      if (register) register.hidden = true;
+
+      panel.hidden = false;
+      panel.innerHTML = `
+        <h2>${titles[index]}</h2>
+        <p>${descriptions[index]}</p>
+        <button class="button" type="button" id="backDashboard">
+          Zurück zum Dashboard
+        </button>
+      `;
+
+      document.getElementById("backDashboard")
+        .addEventListener("click", () => {
+          panel.hidden = true;
+          dashboard.hidden = false;
+          if (register) register.hidden = false;
+        });
+    }
+
+    card.addEventListener("click", openPanel);
+    card.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openPanel();
+      }
+    });
+  });
+});
+</script>
