@@ -2231,3 +2231,32 @@ a,
   outline: none !important;
   caret-color: transparent !important;
 }
+/* FELDJÄGER – TEXTMARKIERUNG DEAKTIVIEREN */
+
+html,
+body,
+body * {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none;
+  caret-color: transparent !important;
+}
+
+/* Eingabefelder bleiben nutzbar */
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  caret-color: auto !important;
+  cursor: text !important;
+}
+
+/* Buttons und Links */
+button,
+a,
+[role="button"] {
+  cursor: pointer !important;
+}
