@@ -2164,3 +2164,34 @@ footer strong {
   } 
 
 } 
+/* =====================================
+   SCHREIBCURSOR ENTFERNEN
+===================================== */
+
+/* Kein blinkender Textcursor auf der Website */
+body,
+body * {
+  caret-color: transparent !important;
+}
+
+/* Kein Textcursor beim Anklicken normaler Texte */
+body,
+body *:not(input):not(textarea):not(select):not([contenteditable="true"]) {
+  cursor: default;
+}
+
+/* Eingabefelder bleiben normal bedienbar */
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  caret-color: auto !important;
+  cursor: text;
+}
+
+/* Schaltflächen behalten den Hand-Cursor */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
