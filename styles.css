@@ -2195,3 +2195,39 @@ a,
 [role="button"] {
   cursor: pointer;
 }
+/* ULTIMATE FIX – KEIN SCHREIBCURSOR */
+
+html,
+body,
+body * {
+  caret-color: transparent !important;
+  cursor: default !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Eingabefelder bleiben bedienbar */
+input,
+textarea,
+select,
+[contenteditable="true"] {
+  caret-color: auto !important;
+  cursor: text !important;
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Klickbare Elemente */
+button,
+a,
+[role="button"],
+.module-card {
+  cursor: pointer !important;
+}
+
+/* Fokus-Markierungen entfernen */
+*:focus,
+*:focus-visible {
+  outline: none !important;
+  caret-color: transparent !important;
+}
